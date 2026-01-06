@@ -17,11 +17,10 @@ struct PharmonitorAdminApp: App {
         }
         .defaultSize(width: 640, height: 420)
 
-        WindowGroup("Settings", id: "settings") {
+        Settings {
             SettingsView()
                 .environmentObject(settingsStore)
         }
-        .defaultSize(width: 520, height: 360)
 
         .commands {
             PharmonitorCommands()
@@ -31,6 +30,7 @@ struct PharmonitorAdminApp: App {
 
 struct PharmonitorCommands: Commands {
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.openSettings) private var openSettings
 
     var body: some Commands {
         CommandMenu("Pharmonitor") {
@@ -47,7 +47,7 @@ struct PharmonitorCommands: Commands {
             Divider()
 
             Button("Settings") {
-                openWindow(id: "settings")
+                openSettings()
             }
             .keyboardShortcut(",")
         }
