@@ -13,9 +13,6 @@ struct SurveyorsView: View {
             Spacer()
         }
         .padding(24)
-        .task {
-            await refreshSessions()
-        }
     }
 
     private var header: some View {
@@ -51,7 +48,7 @@ struct SurveyorsView: View {
                 Text(errorMessage)
                     .foregroundStyle(.red)
             } else if sessions.isEmpty {
-                Text("No sessions returned from the gateway.")
+                Text("No sessions loaded yet. Select Refresh to query the gateway.")
                     .foregroundStyle(.secondary)
             } else {
                 List(sessions, id: \.self) { session in
