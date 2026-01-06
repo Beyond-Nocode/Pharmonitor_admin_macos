@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 @main
@@ -5,7 +6,7 @@ struct PharmonitorAdminApp: App {
     @StateObject private var settingsStore = SettingsStore()
 
     var body: some Scene {
-        WindowGroup("Surveyors", id: "surveyors") {
+        WindowGroup("Surveyors") {
             SurveyorsView()
                 .environmentObject(settingsStore)
         }
@@ -35,7 +36,8 @@ struct PharmonitorCommands: Commands {
     var body: some Commands {
         CommandMenu("Pharmonitor") {
             Button("Surveyors") {
-                openWindow(id: "surveyors")
+                NSApp.activate(ignoringOtherApps: true)
+                NSApp.windows.first { $0.isVisible }?.makeKeyAndOrderFront(nil)
             }
             .keyboardShortcut("1")
 
